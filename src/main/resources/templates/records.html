@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<!-- David Geier, November 17th, 2024 -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>View All Records</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+<h1>All Vinyl Records</h1>
+<button onclick="location.href='/add-record'">Add New Record</button>
+
+<div th:if="${#lists.isEmpty(records)}">
+  <p>Sorry! This database contains no records</p>
+</div>
+
+<div th:unless="${#lists.isEmpty(records)}">
+
+  <table class="table">
+
+    <thead class="thead-dark">
+
+    <tr class="table table-dark">
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Year</th>
+      <th>Actions</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <tr class th:each="record : ${records}">
+      <td th:text="${record.title}"></td>
+      <td th:text="${record.artist}"></td>
+      <td th:text="${record.yearOfRelease}"></td>
+      <td>
+        <a class="btn btn-primary" th:href="@{/records/{id}(id=${record.id})}">View More</a>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
